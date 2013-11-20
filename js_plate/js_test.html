@@ -1,0 +1,38 @@
+<!doctype html />
+<html>
+	<head>
+		<script type="text/javascript" src="js_test.js"></script>
+		
+		
+		<script>
+		
+			var obj;
+		
+			function ready ()
+			{
+				var items = new Array ();
+				
+				for (var i = 0; i <= 200; i = i+30) 
+				{
+					console.log ('i:'+i);
+					var data = {
+						left	: i
+					}
+					
+					var r = new a (data);
+					
+					items.push(r);
+				}
+				
+				console.log (items);
+				
+				for (var key in items) {
+					console.log (items[key].data.left);
+				}
+			}		
+		</script>
+	</head>
+	<body onload="ready()">
+		<canvas width="900" height="600" id="fild"></canvas>
+	</body>
+</html>

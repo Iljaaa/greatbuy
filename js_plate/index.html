@@ -1,0 +1,93 @@
+<!doctype html />
+<html>
+	<head>
+	<script type="text/javascript" src="plate.js"></script>
+	
+		<script type="text/javascript" src="org.js"></script>
+		<script type="text/javascript" src="rectangle.js"></script>
+		<script type="text/javascript" src="title.js"></script>
+		<script type="text/javascript" src="layout.js"></script>
+		
+		
+		<script>
+		
+			var obj;
+		
+			function ready ()
+			{
+				// 
+				var ddd = calckPlateBySize (1000, 1000, 300, 300, 0);
+				console.log (ddd);
+			
+				obj = new Org ("fild");
+				console.log (obj.getWidth());
+			
+			
+				
+				
+				
+				var layout = new Layout ();
+				layout.setLeft (20);
+				layout.setTop (20);
+				
+				/*
+				
+				
+				
+				for (var i = 0; i <= 200; i = i+30) 
+				{
+					var data = {
+						width	: 40, 
+						height	: 40,
+						top		: i,
+						left	: i,
+						name	: 'o-'+i
+					}
+					
+					var r = new Rectangle(data);
+					
+					//layout.addElement (r);
+				}*/
+				
+				var data = {
+					width	: 300, 
+					height	: 400,
+					name	: 'superRect'
+				};
+				console.log (data);
+				
+				
+				var title = new Title({
+					cols	: 15,
+					rows	: 10,
+					rect	: new Rectangle(data)
+				});
+				
+				// расчитываем коэф
+				var k = calckZoomKoef (title.getWidth(), title.getHeight(), obj.getWidth() - 100, obj.getHeight() - 100);
+				layout.setZoom (k);
+				
+				
+				console.log ('title width : '+title.getWidth());
+				console.log ('title height : '+title.getHeight());
+				
+				
+				
+				console.log ('zoomed width : '+title.getZoomWidth());
+				console.log ('zoomed height : '+title.getZoomHeight());		
+				
+				layout.addElement (title);
+				
+				console.log ('zoomed width : '+title.getZoomWidth());
+				console.log ('zoomed height : '+title.getZoomHeight());
+				
+				
+				obj.addLayout (layout);
+				obj.draw ();
+			}		
+		</script>
+	</head>
+	<body onload="ready()">
+		<canvas width="900" height="600" id="fild" style="border: solid 1px orange;"></canvas>
+	</body>
+</html>
