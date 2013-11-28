@@ -10,6 +10,9 @@ Rectangle.prototype._top = 0;
 Rectangle.prototype._width = 0;
 Rectangle.prototype._height = 0;
 
+Rectangle.prototype._fillColor = "rgb(0,0,0)";
+Rectangle.prototype._globalAlfa = 0.3;
+
 
 
 
@@ -86,14 +89,17 @@ Rectangle.prototype.setTop = function (val){
 
 
 
+
+
 Rectangle.prototype.draw = function () 
 {
 
 	var layout = this.getLayout();
 	var ctx = layout.getOrg().getCtx();
 	
-	ctx.fillStyle = "rgb(0,0,0)";
-	
+	ctx.fillStyle = this._fillColor;
+	ctx.globalAlpha = this._globalAlfa;
+		
 	var left = this.getLeft() + layout.getLeft();
 	var top = this.getTop() + layout.getTop();
 	

@@ -5,6 +5,7 @@
 	
 		<script type="text/javascript" src="org.js"></script>
 		<script type="text/javascript" src="rectangle.js"></script>
+		<script type="text/javascript" src="string.js"></script>
 		<script type="text/javascript" src="title.js"></script>
 		<script type="text/javascript" src="layout.js"></script>
 		
@@ -12,76 +13,92 @@
 		<script>
 		
 			var obj;
+			
+			// размеры плитки
+			var plateSize = {
+				width	: 300,
+				height	: 300
+			};
+			
+			// размеры пола
+			var floreSize = {
+				width	: 1000,
+				height	: 1000
+			}
+			
 		
 			function ready ()
 			{
 				// 
-				var ddd = calckPlateBySize (1000, 1000, 300, 300, 0);
-				console.log (ddd);
-			
+				var ddd = calckPlateBySize (floreSize.width, floreSize.height, plateSize.width, plateSize.height, 0);
+				
+				
+				var data = {
+					width		: (plateSize.width - 5), 
+					height		: (plateSize.height - 5),
+					name		: 'superRect',
+					// fillColor	: 
+				};				
+				
+				var title = new Title({
+					cols	: ddd.cols,
+					rows	: ddd.rows,
+					rect	: new Rectangle(data),
+					dif		: 5
+				});
+				
+				
 				obj = new Org ("fild");
-				console.log (obj.getWidth());
-			
-			
+				
+				var zoomKoef = calckZoomKoef(title.getWidth(), title.getHeight(), (obj.getWidth() - 70), (obj.getHeight() - 70));
+				
+				
+				
+				
+				
+				
+				var floarLayout = new Layout ();
+				floarLayout.setLeft (10);
+				floarLayout.setTop (10);
+				floarLayout.setZoom (zoomKoef);
+				
+				
+				var rect = new Rectangle({
+					width		: floreSize.width, 
+					height		: floreSize.height,
+					name		: 'flore',
+				})
+				
+				floarLayout.addElement (rect);
+				
+								
+				
+				
 				
 				
 				
 				var layout = new Layout ();
-				layout.setLeft (20);
-				layout.setTop (20);
+				layout.setLeft (10);
+				layout.setTop (10);
 				
-				/*
-				
-				
-				
-				for (var i = 0; i <= 200; i = i+30) 
-				{
-					var data = {
-						width	: 40, 
-						height	: 40,
-						top		: i,
-						left	: i,
-						name	: 'o-'+i
-					}
-					
-					var r = new Rectangle(data);
-					
-					//layout.addElement (r);
-				}*/
-				
-				var data = {
-					width	: 300, 
-					height	: 400,
-					name	: 'superRect'
-				};
-				console.log (data);
-				
-				
-				var title = new Title({
-					cols	: 15,
-					rows	: 10,
-					rect	: new Rectangle(data)
-				});
-				
+							
 				// расчитываем коэф
-				var k = calckZoomKoef (title.getWidth(), title.getHeight(), obj.getWidth() - 100, obj.getHeight() - 100);
-				layout.setZoom (k);
-				
-				
-				console.log ('title width : '+title.getWidth());
-				console.log ('title height : '+title.getHeight());
-				
-				
-				
-				console.log ('zoomed width : '+title.getZoomWidth());
-				console.log ('zoomed height : '+title.getZoomHeight());		
-				
+				// var k = calckZoomKoef (title.getWidth(), title.getHeight(), obj.getWidth() - 100, obj.getHeight() - 100);
+				layout.setZoom (zoomKoef);						
 				layout.addElement (title);
 				
-				console.log ('zoomed width : '+title.getZoomWidth());
-				console.log ('zoomed height : '+title.getZoomHeight());
+				var str = new String({
+					left		: title.getZoomWidth()+20,
+					top			: parseInt(title.getZoomHeight() * 0.5),
+					name 		: "str",
+					fontSize	: 20,
+					text		: "33333"
+				});
+				
+				floarLayout.addElement (str);
 				
 				
+				obj.addLayout (floarLayout);
 				obj.addLayout (layout);
 				obj.draw ();
 			}		

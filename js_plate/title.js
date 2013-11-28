@@ -22,6 +22,7 @@ Title.prototype.init = function (data)
 	if (data.height != undefined) this._height	= data.height;
 	if (data.cols 	!= undefined) this._cols 	= data.cols;
 	if (data.rows 	!= undefined) this._rows 	= data.rows;
+	if (data.dif 	!= undefined) this._dif 	= data.dif;
 		
 }
 
@@ -96,6 +97,20 @@ Title.prototype.setTop = function (val){
 	this._top = val;
 }
 
+/**
+ *
+ */
+Title.prototype.getDif = function (){
+	return this._dif;
+}
+
+/**
+ *
+ */
+Title.prototype.setDif = function (val){
+	this._dif = val;
+}
+
 
 /**
  *
@@ -117,8 +132,6 @@ Title.prototype.getRowsCount = function (){
 
 Title.prototype.draw = function ()
 {
-	console.log ('title draw');
-	
 	this.drawSelf ();
 	
 	var layout = this.getLayout();
